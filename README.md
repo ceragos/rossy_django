@@ -1,0 +1,2 @@
+# rossy
+Proyecto practica empresarial
