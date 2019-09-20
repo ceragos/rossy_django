@@ -11,7 +11,11 @@ ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'willitapas$rossy',
+        'USER': 'willitapas',
+        'PASSWORD': 'Wlto8715',
+        'HOST': 'willitapas.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     }
 }

@@ -16,6 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from rossy_django.settings import local
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+if local.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(local.MEDIA_URL, document_root=local.MEDIA_ROOT)
