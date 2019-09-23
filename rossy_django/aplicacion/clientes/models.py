@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+from aplicacion.utilidades.models import Auditoria, PersonaBase
+
+
+class Cliente(Auditoria, PersonaBase):
+    pass
