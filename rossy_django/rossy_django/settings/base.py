@@ -45,6 +45,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Captura el request actual y el usuario en el almacenamiento local de subprocesos.
+    'crum.CurrentRequestUserMiddleware',
 ]
 
 ROOT_URLCONF = 'rossy_django.urls'
