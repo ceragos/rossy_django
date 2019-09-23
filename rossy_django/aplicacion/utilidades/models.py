@@ -6,7 +6,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from aplicacion.usuarios.models import Usuario
-from aplicacion.utilidades.funcionalidades import calcular_edad
+from aplicacion.utilidades.funcionalidades import calcular_edad, convertir_valores_campos_mayusculas
 
 TIPO_IDENTIFICACION_CHOICES = (
     ('CC', _('CEDULA DE CIUDADANIA')),
@@ -22,7 +22,6 @@ class Auditoria(models.Model):
     de las clases que hereden de ella.
     """
     activo = models.BooleanField(default=True, verbose_name=_('registro activo'))
-    eliminado = models.BooleanField(default=False, verbose_name=_('registro eliminado'))
     # Auditoria de creación
     creado_por = models.ForeignKey(Usuario, null=True, blank=True, verbose_name='creado por',
                                    related_name='%(class)s_creado_por', on_delete=models.CASCADE)
@@ -33,11 +32,6 @@ class Auditoria(models.Model):
                                        related_name='%(class)s_modificado_por', on_delete=models.CASCADE)
     fecha_modificacion = models.DateTimeField(null=True, blank=True, verbose_name=_('fecha de modificación'))
     ip_modificacion = models.GenericIPAddressField(null=True, blank=True, verbose_name=_('ip de modificación'))
-    # Auditoria de borrado
-    eliminado_por = models.ForeignKey(Usuario, null=True, blank=True, verbose_name='modificado por',
-                                      related_name='%(class)s_eliminado_por', on_delete=models.CASCADE)
-    fecha_eliminacion = models.DateTimeField(null=True, blank=True, verbose_name=_('fecha de eliminación'))
-    ip_eliminacion = models.GenericIPAddressField(null=True, blank=True, verbose_name=_('ip de eliminación'))
 
     class Meta:
         abstract = True
@@ -58,24 +52,8 @@ class Auditoria(models.Model):
             self.fecha_modificacion = datetime.now()
             self.ip_modificacion = get_current_request().META['REMOTE_ADDR']
 
-        # Obtiene todos los campos de tipo charfield
-        char_fields = [field.name for field in self._meta.fields if
-                       isinstance(field, models.CharField) and not getattr(field, 'choices')]
-        for field in char_fields:
-            valor = getattr(self, field, False)
-            if valor:
-                # Elimina los espacios en blanco que no son necesarios
-                valor = " ".join(valor.split())
-                # Cambia los caracteres a mayusculas
-                setattr(self, field, valor.upper())
+        convertir_valores_campos_mayusculas(self)
         super(Auditoria, self).save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        self.eliminado_por = get_current_user()
-        self.fecha_eliminacion = datetime.now()
-        self.ip_eliminacion = get_current_request().META['REMOTE_ADDR']
-        self.eliminado = True
-        self.save()
 
 
 class PersonaBase(models.Model):
