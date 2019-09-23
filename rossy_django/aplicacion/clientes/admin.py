@@ -9,7 +9,7 @@ class ClienteAdmin(AdminModel):
     fieldsets = (
         ('Información del Cliente', {
             'fields': ('tipo_identificacion', 'numero_identificacion', 'nombres', 'apellidos', 'fecha_nacimiento',
-                       'celular', 'direccion')
+                       'celular', 'ciudad', 'barrio', 'direccion')
         }),
         ('Auditoria', {
             'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
