@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'aplicacion.usuarios',
     'aplicacion.clientes',
     'aplicacion.geolocalizacion',
+    'aplicacion.bodega',
 ]
 
 MIDDLEWARE = [
