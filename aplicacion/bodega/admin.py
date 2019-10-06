@@ -64,8 +64,11 @@ class InventarioProductoAdmin(AdminModel):
     search_fields = ['producto__nombre']
     fieldsets = (
         ('Inventario de Productos', {
-            'fields': ('producto', 'unidades', 'unidad_medida', 'precio_costo', 'precio_venta', 'fecha_elaboracion',
+            'fields': ('producto', 'unidades', 'unidad_medida', 'fecha_elaboracion',
                        'fecha_vencimiento')
+        }),
+        ('Precio y costo por unidad', {
+            'fields': ('precio_costo', 'precio_venta')
         }),
         ('Auditoria', {
             'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
