@@ -35,10 +35,24 @@ class InventarioInsumo(Auditoria):
     unidades = models.IntegerField(null=True, blank=True, verbose_name=_('unidades'))
     precio_unitario = models.IntegerField(null=True, blank=True, verbose_name=_('precio unitario'))
 
+    class Meta:
+        verbose_name = _('inventario de insumos')
+        verbose_name_plural = _('inventarios de insumos')
+
+    def __str__(self):
+        return self.insumo.nombre
+
 
 class Producto(Auditoria):
     nombre = models.CharField(max_length=30, null=False, blank=False, verbose_name=_('nombre'))
     descripcion = models.TextField(null=True, blank=True, verbose_name=_('descripción'))
+
+    class Meta:
+        verbose_name = _('producto')
+        verbose_name_plural = _('productos')
+
+    def __str__(self):
+        return self.nombre
 
 
 class InventarioProducto(Auditoria):
@@ -51,3 +65,10 @@ class InventarioProducto(Auditoria):
     precio_venta = models.IntegerField(null=False, blank=False, verbose_name=_('precio de venta'))
     fecha_elaboracion = models.DateField(null=False, blank=False, verbose_name=_('fecha de elaboración'))
     fecha_vencimiento = models.DateField(null=False, blank=False, verbose_name=_('fecha de vencimiento'))
+
+    class Meta:
+        verbose_name = _('inventario de producto')
+        verbose_name_plural = _('inventarios de productos')
+
+    def __str__(self):
+        return self.producto
