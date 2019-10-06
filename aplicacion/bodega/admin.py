@@ -19,6 +19,7 @@ class UnidadMedidaAdmin(AdminModel):
 
 @admin.register(Insumo)
 class InsumoAdmin(AdminModel):
+    search_fields = ['nombre']
     fieldsets = (
         ('Información del Insumo', {
             'fields': ('nombre', 'cantidad', 'unidad_medida')
@@ -32,6 +33,7 @@ class InsumoAdmin(AdminModel):
 
 @admin.register(InventarioInsumo)
 class InventarioInsumoAdmin(AdminModel):
+    search_fields = ['insumo__nombre']
     fieldsets = (
         ('Inventario de Insumos', {
             'fields': ('insumo', 'unidades', 'precio_unitario')
@@ -45,6 +47,7 @@ class InventarioInsumoAdmin(AdminModel):
 
 @admin.register(Producto)
 class ProductoAdmin(AdminModel):
+    search_fields = ['nombre']
     fieldsets = (
         ('Información del Producto', {
             'fields': ('nombre', 'descripcion')
@@ -58,6 +61,7 @@ class ProductoAdmin(AdminModel):
 
 @admin.register(InventarioProducto)
 class InventarioProductoAdmin(AdminModel):
+    search_fields = ['producto__nombre']
     fieldsets = (
         ('Inventario de Productos', {
             'fields': ('producto', 'unidades', 'unidad_medida', 'precio_costo', 'precio_venta', 'fecha_elaboracion',
