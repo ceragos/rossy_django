@@ -18,7 +18,7 @@ def calcular_edad(fecha_nacimiento):
     return 0
 
 
-def convertir_valores_campos_mayusculas(self):
+def convertir_valores_campos_capitalize(self):
     from django.db import models
     # Obtiene todos los campos de tipo charfield y genera una lista de campos
     char_fields = [field.name for field in self._meta.fields if
@@ -30,4 +30,4 @@ def convertir_valores_campos_mayusculas(self):
             # Elimina los espacios en blanco que no son necesarios
             valor = " ".join(valor.split())
             # Cambia los caracteres a mayusculas
-            setattr(self, field, valor.upper())
+            setattr(self, field, valor.capitalize())
