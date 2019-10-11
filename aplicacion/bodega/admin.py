@@ -7,6 +7,7 @@ from aplicacion.utilidades.admin import AdminModel
 
 @admin.register(UnidadMedida)
 class UnidadMedidaAdmin(AdminModel):
+    list_display = ['nombre', 'abreviatura', 'creado_por', 'fecha_creacion', 'modificado_por', 'fecha_modificacion']
     fieldsets = (
         ('Unidad de Medida', {
             'fields': ('nombre', 'abreviatura')
@@ -20,6 +21,7 @@ class UnidadMedidaAdmin(AdminModel):
 
 @admin.register(Marca)
 class MarcaAdmin(AdminModel):
+    list_display = ['nombre', 'creado_por', 'fecha_creacion', 'modificado_por', 'fecha_modificacion']
     fieldsets = (
         ('Marca', {
             'fields': ('nombre',)
@@ -48,9 +50,10 @@ class InsumoAdmin(AdminModel):
 @admin.register(InsumoDetallado)
 class InsumoDetalladoAdmin(AdminModel):
     search_fields = ['insumo__nombre']
+    list_display = ['insumo', 'marca', 'cantidad', 'unidad_medida']
     fieldsets = (
         ('Información del Insumo', {
-            'fields': ('insumo', 'cantidad', 'unidad_medida', 'marca')
+            'fields': ('insumo', 'marca', 'cantidad', 'unidad_medida')
         }),
         ('Auditoria', {
             'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
@@ -62,6 +65,7 @@ class InsumoDetalladoAdmin(AdminModel):
 @admin.register(CompraInsumo)
 class CompraInsumoAdmin(AdminModel):
     search_fields = ['insumo_detallado__insumo__nombre']
+    list_display = ['insumo_detallado', 'unidades', 'precio_unitario', 'valor_compra']
     fieldsets = (
         ('Información de la Compra', {
             'fields': ('insumo_detallado', 'unidades', 'precio_unitario', 'valor_compra')
@@ -78,7 +82,8 @@ class CompraInsumoAdmin(AdminModel):
 
 @admin.register(Producto)
 class ProductoAdmin(AdminModel):
-    search_fields = ['nombre']
+    search_fields = ['nombre',]
+    list_display = ['nombre', 'creado_por', 'fecha_creacion', 'modificado_por', 'fecha_modificacion']
     fieldsets = (
         ('Información del Producto', {
             'fields': ('nombre', 'descripcion')
@@ -93,6 +98,7 @@ class ProductoAdmin(AdminModel):
 @admin.register(ProductoDetallado)
 class ProductoDetalladoAdmin(AdminModel):
     search_fields = ['producto__nombre']
+    list_display = ['producto', 'cantidad', 'unidad_medida', 'precio_venta', 'unidades_disponibles']
     fieldsets = (
         ('Información del Producto', {
             'fields': ('producto', 'cantidad', 'unidad_medida', 'precio_venta', 'unidades_disponibles')
@@ -110,6 +116,8 @@ class ProductoDetalladoAdmin(AdminModel):
 @admin.register(ProduccionProducto)
 class ProduccionProductoAdmin(AdminModel):
     search_fields = ['producto_detallado__producto__nombre']
+    list_display = ['producto_detallado', 'unidades_producidas', 'precio_costo', 'fecha_elaboracion',
+                    'fecha_vencimiento']
     fieldsets = (
         ('Información de la Producción', {
             'fields': ('lote', 'producto_detallado', 'unidades_producidas', 'precio_costo', 'fecha_elaboracion',
