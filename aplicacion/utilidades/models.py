@@ -6,7 +6,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from aplicacion.usuarios.models import Usuario
-from aplicacion.utilidades.funcionalidades import calcular_edad, convertir_valores_campos_mayusculas
+from aplicacion.utilidades.funcionalidades import calcular_edad, convertir_valores_campos_capitalize
 
 TIPO_IDENTIFICACION_CHOICES = (
     ('CC', _('CEDULA DE CIUDADANIA')),
@@ -52,7 +52,7 @@ class Auditoria(models.Model):
             self.fecha_modificacion = datetime.now()
             self.ip_modificacion = get_current_request().META['REMOTE_ADDR']
 
-        convertir_valores_campos_mayusculas(self)
+        convertir_valores_campos_capitalize(self)
         super(Auditoria, self).save(*args, **kwargs)
 
 
@@ -77,6 +77,14 @@ class PersonaBase(models.Model):
     @property
     def nombre_completo(self):
         return "{} {}".format(self.nombres, self.apellidos)
+
+    @property
+    def primer_nombre(self):
+        return self.nombres.split()[0]
+
+    @property
+    def primer_apellido(self):
+        return self.apellidos.split()[0]
 
     @property
     def edad(self):

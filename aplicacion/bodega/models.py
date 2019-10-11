@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
 from aplicacion.utilidades.models import Auditoria
@@ -47,8 +49,8 @@ class InsumoDetallado(Auditoria):
     marca = models.ForeignKey(Marca, null=False, blank=False, verbose_name=_('marca'), on_delete=models.PROTECT)
 
     class Meta:
-        verbose_name = _('producto detallado')
-        verbose_name_plural = _('productos detallados')
+        verbose_name = _('insumo detallado')
+        verbose_name_plural = _('insumos detallados')
 
     def __str__(self):
         return '{} {} {} {}'.format(self.insumo, self.marca, self.cantidad, self.unidad_medida)
@@ -66,7 +68,7 @@ class CompraInsumo(Auditoria):
         verbose_name_plural = _('compras de insumos')
 
     def __str__(self):
-        return self.insumo_detallado
+        return '{}'.format(self.insumo_detallado)
 
     def save(self, *args, **kwargs):
 
@@ -91,7 +93,7 @@ class Producto(Auditoria):
 class ProductoDetallado(Auditoria):
     producto = models.ForeignKey(Producto, null=False, blank=False, verbose_name=_('producto'),
                                  on_delete=models.PROTECT, related_name='producto_detallado_producto')
-    cantidad = models.IntegerField(null=True, blank=True, verbose_name=_('cantidad'))
+    cantidad = models.IntegerField(null=False, blank=False, verbose_name=_('cantidad'))
     unidad_medida = models.ForeignKey(UnidadMedida, null=True, blank=False, verbose_name=_('unidad de medida'),
                                       on_delete=models.SET_NULL, related_name='producto_detallado_unidad_medida')
     precio_venta = models.IntegerField(null=False, blank=False, verbose_name=_('precio de venta'))
@@ -102,11 +104,11 @@ class ProductoDetallado(Auditoria):
         verbose_name_plural = _('productos detallados')
 
     def __str__(self):
-        return '{} {} {}'.format(self.producto, self.cantidad, self.unidad_medida)
+        return '{} por {} {}'.format(self.producto, self.cantidad, self.unidad_medida)
 
 
 class ProduccionProducto(Auditoria):
-    lote = models.IntegerField(null=False, blank=False, verbose_name=_('lote'))
+    lote = models.IntegerField(null=False, blank=False, verbose_name=_('lote'), default=0)
     producto_detallado = models.ForeignKey(ProductoDetallado, null=False, blank=False, verbose_name=_('producto'),
                                            on_delete=models.PROTECT,
                                            related_name='produccion_producto_producto_detallado')
@@ -120,22 +122,27 @@ class ProduccionProducto(Auditoria):
         verbose_name_plural = _('producción de productos')
 
     def __str__(self):
-        return self.producto_detallado
+        return '{}'.format(self.producto_detallado)
 
     def save(self, *args, **kwargs):
         # Si la producción se esta creando:
         if self._state.adding:
 
             # El numero de lote sera el consecutivo del anterior, del mismo producto
-            self.lote = self.objects.all().order_by('-fecha_creacion').first().lote + 1
+            # self.lote = self.objects.all().order_by('-fecha_creacion').first().lote + 1
+
+            producto_detallado = ProductoDetallado.objects.get(id=self.producto_detallado.id)
 
             # El guardado incrementa el numero de unidades, a el numero de productos disponibles
-            self.producto_detallado.unidades_disponibles += self.unidades_producidas
+            producto_detallado.unidades_disponibles += self.unidades_producidas
+            producto_detallado.save()
 
         super(ProduccionProducto, self).save(*args, **kwargs)
 
-    def delete(self, using=None, keep_parents=False):
-        # El eliminado descuenta el numero de unidades, del numero de productos disponibles
-        self.producto_detallado.unidades_disponibles -= self.unidades_producidas
+@receiver(pre_delete, sender=ProduccionProducto)
+def produccion_producto_delete_handler(sender, instance, **kwargs):
+    producto_detallado = ProductoDetallado.objects.get(id=instance.producto_detallado.id)
 
-        super(ProduccionProducto, self).delete()
+    # El eliminado de producto venta incrementa el numero de unidades, a el numero de productos disponibles
+    producto_detallado.unidades_disponibles -= instance.unidades_producidas
+    producto_detallado.save()
