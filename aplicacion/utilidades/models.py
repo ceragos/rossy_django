@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from crum import get_current_user, get_current_request
+from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -14,6 +15,13 @@ TIPO_IDENTIFICACION_CHOICES = (
     ('CE', _('CEDULA EXTRANJERA')),
     ('PS', _('PASAPORTE')),
 )
+
+def validar_cadenas_numericas(value):
+    if not value.isdigit():
+        raise ValidationError(
+            _('No es un número valido'),
+            params={'value': value},
+        )
 
 
 class Auditoria(models.Model):
@@ -60,8 +68,9 @@ class PersonaBase(models.Model):
     tipo_identificacion = models.CharField(max_length=2, null=True, blank=True,
                                            verbose_name=_('tipo de identificación'),
                                            choices=TIPO_IDENTIFICACION_CHOICES)
-    numero_identificacion = models.CharField(max_length=20, null=True, blank=True,
-                                             verbose_name=_('numero de identificación'), unique=True)
+    numero_identificacion = models.CharField(max_length=20, null=True, blank=True, unique=True,
+                                             validators=[validar_cadenas_numericas],
+                                             verbose_name=_('numero de identificación'))
     nombres = models.CharField(max_length=30, null=True, blank=True, verbose_name=_('nombres'))
     apellidos = models.CharField(max_length=30, null=True, blank=True, verbose_name=_('apellidos'))
     fecha_nacimiento = models.DateField(null=True, blank=True, verbose_name=_('fecha de nacimiento'))
