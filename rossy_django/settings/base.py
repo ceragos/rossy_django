@@ -26,6 +26,7 @@ SECRET_KEY = '6-9u20(^1j7$tke_q1rw0=-3*sw0l#o10k(g)9p1kpdq6afzkl'
 # Application definition
 
 INSTALLED_APPS = [
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +39,8 @@ INSTALLED_APPS = [
     'aplicacion.clientes',
     'aplicacion.geolocalizacion',
     'aplicacion.bodega',
+    'aplicacion.facturacion',
+    'aplicacion.rutas',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +73,47 @@ TEMPLATES = [
         },
     },
 ]
+
+SUIT_CONFIG  =  {
+    # header
+    'ADMIN_NAME': 'Rossy',
+    'HEADER_DATE_FORMAT': 'l, j. F Y ',
+    'HEADER_TIME_FORMAT': 'h: i a',
+
+    # formularios
+    # 'SHOW_REQUIRED_ASTERISK': verdadero, # predeterminado verdadero
+    # 'CONFIRM_UNSAVED_CHANGES': verdadero, # predeterminado verdadero
+
+    # menu
+    'SEARCH_URL': '',
+    'MENU_ICONS': {
+        'geolocalizacion': 'icon-map-marker',
+        'rutas': 'icon-road',
+        'bodega': 'icon-th-large',
+        'clientes': 'icon-briefcase',
+        'facturacion': 'icon-list',
+        'admin': 'icon-cog',
+        'usuarios': 'icon-user',
+        'auth': 'icon-lock',
+    },
+    'MENU_OPEN_FIRST_CHILD': False, # Predeterminado True
+    #' MENU_EXCLUDE ': (' auth.group ',),
+    'MENU': (
+        {'app': 'clientes', 'models': ('Cliente',)},
+        {'app': 'bodega', 'models': ('ProduccionProducto', 'ProductoDetallado', 'Producto',
+                                     'CompraInsumo', 'InsumoDetallado', 'Insumo',
+                                     'Marca', 'UnidadMedida',)},
+        {'app': 'facturacion', 'models': ('Factura', 'ProductoVenta', 'FacturaCredito', 'AbonoCredito',)},
+        {'app': 'rutas', 'models': ('Ruta', 'Zona',)},
+        {'app': 'geolocalizacion', 'models': ('Pais', 'Departamento', 'Ciudad', 'Barrio')},
+        {'app': 'usuarios', 'models': ('Usuario',)},
+        {'app': 'auth', 'models': ('group',)},
+        {'app': 'admin', 'models': ('logentry',)},
+    ),
+
+    # misc
+    # 'LIST_PER_PAGE': 15
+}
 
 WSGI_APPLICATION = 'rossy_django.wsgi.application'
 
