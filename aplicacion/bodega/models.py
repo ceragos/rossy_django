@@ -43,7 +43,7 @@ class Insumo(Auditoria):
 class InsumoDetallado(Auditoria):
     insumo = models.ForeignKey(Insumo, null=False, blank=False, verbose_name=_('insumo'), on_delete=models.PROTECT,
                                related_name='insumo_detallado_insumo')
-    cantidad = models.IntegerField(null=False, blank=False, verbose_name=_('cantidad'))
+    cantidad = models.PositiveIntegerField(null=False, blank=False, verbose_name=_('cantidad'))
     unidad_medida = models.ForeignKey(UnidadMedida, null=False, blank=False, verbose_name=_('unidad de medida'),
                                       on_delete=models.PROTECT, related_name='insumo_detallado_unidad_medida')
     marca = models.ForeignKey(Marca, null=False, blank=False, verbose_name=_('marca'), on_delete=models.PROTECT)
@@ -59,9 +59,9 @@ class InsumoDetallado(Auditoria):
 class CompraInsumo(Auditoria):
     insumo_detallado = models.ForeignKey(InsumoDetallado, null=False, blank=False, verbose_name=_('insumo detallado'),
                                          on_delete=models.PROTECT, related_name='compra_insumo_insumo_detallado')
-    unidades = models.IntegerField(null=False, blank=False, verbose_name=_('unidades'))
-    precio_unitario = models.IntegerField(null=False, blank=False, verbose_name=_('precio unitario'))
-    valor_compra = models.IntegerField(null=True, blank=True, verbose_name=_('valor de la compra'))
+    unidades = models.PositiveIntegerField(null=False, blank=False, verbose_name=_('unidades'))
+    precio_unitario = models.PositiveIntegerField(null=False, blank=False, verbose_name=_('precio unitario'))
+    valor_compra = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('valor de la compra'))
 
     class Meta:
         verbose_name = _('compra de insumo')
@@ -93,11 +93,11 @@ class Producto(Auditoria):
 class ProductoDetallado(Auditoria):
     producto = models.ForeignKey(Producto, null=False, blank=False, verbose_name=_('producto'),
                                  on_delete=models.PROTECT, related_name='producto_detallado_producto')
-    cantidad = models.IntegerField(null=False, blank=False, verbose_name=_('cantidad'))
+    cantidad = models.PositiveIntegerField(null=False, blank=False, verbose_name=_('cantidad'))
     unidad_medida = models.ForeignKey(UnidadMedida, null=True, blank=False, verbose_name=_('unidad de medida'),
                                       on_delete=models.SET_NULL, related_name='producto_detallado_unidad_medida')
-    precio_venta = models.IntegerField(null=False, blank=False, verbose_name=_('precio de venta'))
-    unidades_disponibles = models.IntegerField(null=True, blank=True, verbose_name=_('unidades disponibles'), default=0)
+    precio_venta = models.PositiveIntegerField(null=False, blank=False, verbose_name=_('precio de venta'))
+    unidades_disponibles = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('unidades disponibles'), default=0)
 
     class Meta:
         verbose_name = _('producto detallado')
@@ -112,8 +112,8 @@ class ProduccionProducto(Auditoria):
     producto_detallado = models.ForeignKey(ProductoDetallado, null=False, blank=False, verbose_name=_('producto'),
                                            on_delete=models.PROTECT,
                                            related_name='produccion_producto_producto_detallado')
-    unidades_producidas = models.IntegerField(null=True, blank=True, verbose_name=_('unidades producidas'))
-    precio_costo = models.IntegerField(null=True, blank=True, verbose_name=_('precio de costo'))
+    unidades_producidas = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('unidades producidas'))
+    precio_costo = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('precio de costo'))
     fecha_elaboracion = models.DateField(null=False, blank=False, verbose_name=_('fecha de elaboración'))
     fecha_vencimiento = models.DateField(null=False, blank=False, verbose_name=_('fecha de vencimiento'))
 

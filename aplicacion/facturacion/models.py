@@ -68,9 +68,9 @@ class ProductoVenta(Auditoria):
     producto_detallado = models.ForeignKey(ProductoDetallado, null=False, blank=False,
                                            verbose_name=_('producto detallado'), on_delete=models.PROTECT,
                                            related_name='producto_venta_producto_detallado')
-    unidades_vendidas = models.IntegerField(null=False, blank=False, verbose_name=_('unidades vendidas'))
-    precio_venta = models.IntegerField(null=True, blank=True, verbose_name=_('precio de venta'), default=0)
-    valor_venta = models.IntegerField(null=True, blank=True, verbose_name=_('valor de la venta'), default=0)
+    unidades_vendidas = models.PositiveIntegerField(null=False, blank=False, verbose_name=_('unidades vendidas'))
+    precio_venta = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('precio de venta'), default=0)
+    valor_venta = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('valor de la venta'), default=0)
 
     class Meta:
         verbose_name = _('producto vendido')
@@ -144,7 +144,7 @@ class AbonoCredito(Auditoria):
     factura = models.ForeignKey(Factura, null=False, blank=False, verbose_name=_('factura'), on_delete=models.PROTECT,
                                 related_name='abono_factura_factura')
     fecha_abono = models.DateTimeField(null=False, blank=False, verbose_name=_('fecha del abono'))
-    valor_abono = models.IntegerField(null=True, blank=True, verbose_name=_('valor del abono'))
+    valor_abono = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('valor del abono'))
 
     class Meta:
         verbose_name = 'Abono del crédito'
