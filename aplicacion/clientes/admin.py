@@ -6,6 +6,7 @@ from aplicacion.utilidades.admin import AdminModel
 
 @admin.register(Cliente)
 class ClienteAdmin(AdminModel):
+    search_fields = ['numero_identificacion', 'nombres', 'apellidos']
     list_filter = ['ruta_cliente', 'ruta_cliente__zona_ruta']
     list_display = ('abbr_tipo_identificacion', 'numero_identificacion', 'nombre_completo', 'celular', 'ciudad', 'barrio',
                     'direccion')
