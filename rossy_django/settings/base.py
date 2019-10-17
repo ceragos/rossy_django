@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'aplicacion.bodega',
     'aplicacion.facturacion',
     'aplicacion.rutas',
+    'aplicacion.utilidades',
 ]
 
 MIDDLEWARE = [
@@ -86,29 +87,29 @@ SUIT_CONFIG  =  {
 
     # menu
     'SEARCH_URL': '',
-    'MENU_ICONS': {
-        'geolocalizacion': 'icon-map-marker',
-        'rutas': 'icon-road',
-        'bodega': 'icon-th-large',
-        'clientes': 'icon-briefcase',
-        'facturacion': 'icon-list',
-        'admin': 'icon-cog',
-        'usuarios': 'icon-user',
-        'auth': 'icon-lock',
-    },
+    # 'MENU_ICONS': {
+    #     'clientes': 'icon-briefcase',
+    #     'bodega': 'icon-th-large',
+    #     'facturacion': 'icon-list',
+    #     'rutas': 'icon-road',
+    #     'geolocalizacion': 'icon-map-marker',
+    #     'usuarios': 'icon-user',
+    #     'auth': 'icon-lock',
+    #     'admin': 'icon-cog',
+    # },
     'MENU_OPEN_FIRST_CHILD': False, # Predeterminado True
     #' MENU_EXCLUDE ': (' auth.group ',),
     'MENU': (
-        {'app': 'clientes', 'models': ('Cliente',)},
-        {'app': 'bodega', 'models': ('ProduccionProducto', 'ProductoDetallado', 'Producto',
-                                     'CompraInsumo', 'InsumoDetallado', 'Insumo',
-                                     'Marca', 'UnidadMedida',)},
-        {'app': 'facturacion', 'models': ('Factura', 'ProductoVenta', 'FacturaCredito', 'AbonoCredito',)},
-        {'app': 'rutas', 'models': ('Ruta', 'Zona',)},
-        {'app': 'geolocalizacion', 'models': ('Pais', 'Departamento', 'Ciudad', 'Barrio')},
-        {'app': 'usuarios', 'models': ('Usuario',)},
-        {'app': 'auth', 'models': ('group',)},
-        {'app': 'admin', 'models': ('logentry',)},
+        {'app': 'clientes', 'icon': 'icon-briefcase', 'models': ('Cliente',)},
+        {'app': 'bodega', 'icon': 'icon-th-large', 'models': ('ProduccionProducto', 'ProductoDetallado', 'Producto',
+                                                              'CompraInsumo', 'InsumoDetallado', 'Insumo',
+                                                              'Marca', 'UnidadMedida',)},
+        {'app': 'facturacion', 'icon': 'icon-list', 'models': ('Factura', 'ProductoVenta', 'FacturaCredito', 'AbonoCredito',)},
+        {'app': 'rutas', 'icon': 'icon-road', 'models': ('Ruta', 'Zona',)},
+        {'app': 'geolocalizacion', 'icon': 'icon-map-marker', 'models': ('Pais', 'Departamento', 'Ciudad', 'Barrio')},
+        {'app': 'usuarios', 'icon': 'icon-user', 'models': ('Usuario',)},
+        {'app': 'auth', 'icon': 'icon-lock', 'models': ('group',)},
+        {'app': 'admin', 'icon': 'icon-cog', 'models': ('logentry',)},
     ),
 
     # misc
@@ -157,7 +158,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 
 # Media config

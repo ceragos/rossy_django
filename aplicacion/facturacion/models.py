@@ -53,7 +53,7 @@ class Factura(Auditoria):
             raise ValidationError({'contado': ["Solo puede seleccionar una opcion (Credito / Contado)",],
                                    'credito': ["Solo puede seleccionar una opcion (Credito / Contado)", ]})
 
-        if self.contado:
+        if self.fecha_pago is not None and self.contado:
             raise ValidationError({'fecha_pago': ["Solo disponible para pagos a credito", ]})
 
     def save(self, *args, **kwargs):
@@ -89,6 +89,12 @@ class ProductoVenta(Auditoria):
 
         if self.producto_detallado.unidades_disponibles <= 0:
             raise ValidationError({'producto_detallado': ["Este producto se encuentra agotado en el sistema.",]})
+
+        if self.producto_detallado.unidades_disponibles < self.unidades_vendidas:
+            raise ValidationError({'producto_detallado': ["Solo hay {} {} disponibles.".format(
+                self.producto_detallado.unidades_disponibles,
+                self.producto_detallado.unidad_medida.nombre
+            ), ]})
 
     def save(self, *args, **kwargs):
         if self._state.adding:

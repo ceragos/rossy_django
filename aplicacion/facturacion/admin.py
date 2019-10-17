@@ -85,11 +85,15 @@ class FacturaCreditoAdmin(AdminModel):
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion']
     inlines = [AbonoCreditoInline]
 
+    def has_add_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(AbonoCredito)
 class AbonoCreditoAdmin(AdminModel):
-    search_fields = ['factura__cliente__numero_identificacion']
-    list_display = ['factura_numero', 'fecha_abono', 'valor_abono',]
+    search_fields = ['factura__cliente__numero_identificacion', 'factura__cliente__nombres',
+                     'factura__cliente__apellidos']
+    list_display = ['factura_numero', 'cliente', 'fecha_abono', 'valor_abono',]
     fieldsets = (
         ('Información del Abono', {
             'fields': ('fecha_abono', 'valor_abono',)
@@ -101,3 +105,11 @@ class AbonoCreditoAdmin(AdminModel):
     )
     readonly_fields = ['creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion']
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def cliente(self, obj):
+        return "{} - {} {}".format(obj.factura.cliente.numero_identificacion,
+                                   obj.factura.cliente.primer_nombre,
+                                   obj.factura.cliente.primer_apellido)
