@@ -12,8 +12,8 @@ ALLOWED_HOSTS = ['*']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'rossycomercializadora$rossy',
-        'USER': 'rossycomercializadora',
+        'NAME': 'rossycomercializ$rossy',
+        'USER': 'rossycomercializ',
         'PASSWORD': 'gitabue',
         'HOST': 'rossycomercializadora.mysql.pythonanywhere-services.com',
         'PORT': '3306',
