@@ -14,7 +14,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'rossycomercializ$rossy',
         'USER': 'rossycomercializ',
-        'PASSWORD': 'gitabue',
+        'PASSWORD': 'gitabue123',
         'HOST': 'rossycomercializadora.mysql.pythonanywhere-services.com',
         'PORT': '3306',
         'OPTIONS': {
