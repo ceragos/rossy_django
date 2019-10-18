@@ -100,6 +100,7 @@ SUIT_CONFIG  =  {
     'MENU_OPEN_FIRST_CHILD': False, # Predeterminado True
     #' MENU_EXCLUDE ': (' auth.group ',),
     'MENU': (
+        {'label': 'Dashboard', 'icon': 'icon-list-alt', 'url': '/'},
         {'app': 'clientes', 'icon': 'icon-briefcase', 'models': ('Cliente',)},
         {'app': 'bodega', 'icon': 'icon-th-large', 'models': ('ProduccionProducto', 'ProductoDetallado', 'Producto',
                                                               'CompraInsumo', 'InsumoDetallado', 'Insumo',
