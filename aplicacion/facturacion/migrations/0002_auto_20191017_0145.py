@@ -60,7 +60,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='abonocredito',
             name='factura',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='abono_factura_factura', to='facturacion.Factura', verbose_name='factura'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='abono_credito_factura', to='facturacion.Factura', verbose_name='factura'),
         ),
         migrations.AddField(
             model_name='abonocredito',
