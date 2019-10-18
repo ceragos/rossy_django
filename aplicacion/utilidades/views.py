@@ -20,8 +20,11 @@ class IndexTemplateView(TemplateView):
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
-        self.fecha_inicial = request.POST.get('fecha_inicial')
-        self.fecha_final = request.POST.get('fecha_final')
+        fecha_inicial = request.POST.get('fecha_inicial')
+        fecha_final = request.POST.get('fecha_final')
+        if fecha_inicial and fecha_final:
+            self.fecha_inicial = datetime.strptime(fecha_inicial, '%Y-%m-%d')
+            self.fecha_final = datetime.strptime(fecha_final, '%Y-%m-%d')
         form = FiltroRangoFechaForm(request.POST)
         context = self.get_context_data()
         context['form'] = form
@@ -39,39 +42,27 @@ class IndexTemplateView(TemplateView):
     def get_total_facturas(self):
         queryset_factura = Factura.objects.all()
         if self.fecha_inicial and self.fecha_final:
-            fecha_inicial = datetime.strptime(self.fecha_inicial, '%d/%m/%Y')
-            fecha_final = datetime.strptime(self.fecha_final, '%d/%m/%Y')
-
-            queryset_factura = queryset_factura.filter(fecha_compra__range=[fecha_inicial, fecha_final])
+            queryset_factura = queryset_factura.filter(fecha_compra__range=[self.fecha_inicial, self.fecha_final])
         total = queryset_factura.aggregate(total=Sum('total'))['total']
         return total if total else 0
 
     def get_ventas_contado(self):
         queryset_factura = Factura.objects.filter(contado=True)
         if self.fecha_inicial and self.fecha_final:
-            fecha_inicial = datetime.strptime(self.fecha_inicial, '%d/%m/%Y')
-            fecha_final = datetime.strptime(self.fecha_final, '%d/%m/%Y')
-
-            queryset_factura = queryset_factura.filter(fecha_compra__range=[fecha_inicial, fecha_final])
+            queryset_factura = queryset_factura.filter(fecha_compra__range=[self.fecha_inicial, self.fecha_final])
         total = queryset_factura.aggregate(total=Sum('total'))['total']
         return total if total else 0
 
     def get_ventas_credito(self):
         queryset_factura = Factura.objects.filter(credito=True)
         if self.fecha_inicial and self.fecha_final:
-            fecha_inicial = datetime.strptime(self.fecha_inicial, '%d/%m/%Y')
-            fecha_final = datetime.strptime(self.fecha_final, '%d/%m/%Y')
-
-            queryset_factura = queryset_factura.filter(fecha_compra__range=[fecha_inicial, fecha_final])
+            queryset_factura = queryset_factura.filter(fecha_compra__range=[self.fecha_inicial, self.fecha_final])
         total = queryset_factura.aggregate(total=Sum('total'))['total']
         return total if total else 0
 
     def get_abonos_credito(self):
         queryset_abonos = AbonoCredito.objects.all()
         if self.fecha_inicial and self.fecha_final:
-            fecha_inicial = datetime.strptime(self.fecha_inicial, '%d/%m/%Y')
-            fecha_final = datetime.strptime(self.fecha_final, '%d/%m/%Y')
-
-            queryset_abonos = queryset_abonos.filter(fecha_abono__range=[fecha_inicial, fecha_final])
+            queryset_abonos = queryset_abonos.filter(fecha_abono__range=[self.fecha_inicial, self.fecha_final])
         total = queryset_abonos.aggregate(total=Sum('valor_abono'))['total']
         return total if total else 0
