@@ -12,10 +12,10 @@ ALLOWED_HOSTS = ['*']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'rossycomercializadora$rossy',
-        'USER': 'rossycomercializadora',
-        'PASSWORD': 'gitabue',
-        'HOST': 'rossycomercializadora.mysql.pythonanywhere-services.com',
+        'NAME': 'willitapas$rossy',
+        'USER': 'willitapas',
+        'PASSWORD': 'Wlto8715',
+        'HOST': 'willitapas.mysql.pythonanywhere-services.com',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
