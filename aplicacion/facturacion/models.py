@@ -142,7 +142,7 @@ class FacturaCredito(Factura):
 
 class AbonoCredito(Auditoria):
     factura = models.ForeignKey(Factura, null=False, blank=False, verbose_name=_('factura'), on_delete=models.PROTECT,
-                                related_name='abono_factura_factura')
+                                related_name='abono_credito_factura')
     fecha_abono = models.DateTimeField(null=False, blank=False, verbose_name=_('fecha del abono'))
     valor_abono = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('valor del abono'))
 
