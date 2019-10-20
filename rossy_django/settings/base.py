@@ -27,6 +27,7 @@ SECRET_KEY = '6-9u20(^1j7$tke_q1rw0=-3*sw0l#o10k(g)9p1kpdq6afzkl'
 
 INSTALLED_APPS = [
     'suit',
+    'aplicacion.registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -167,3 +168,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 AUTH_USER_MODEL = "usuarios.Usuario"
+
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
