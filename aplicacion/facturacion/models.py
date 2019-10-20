@@ -43,7 +43,7 @@ class Factura(Auditoria):
             return self.total
         elif self.credito:
             total_abonos = 0
-            for abono in self.abono_factura_factura.all():
+            for abono in self.abono_credito_factura.all():
                 total_abonos += abono.valor_abono
             return total_abonos
 
