@@ -116,7 +116,7 @@ class ProductoDetalladoAdmin(AdminModel):
 @admin.register(ProduccionProducto)
 class ProduccionProductoAdmin(AdminModel):
     search_fields = ['producto_detallado__producto__nombre']
-    list_display = ['producto_detallado', 'unidades_producidas', 'precio_costo', 'fecha_elaboracion',
+    list_display = ['producto_detallado', 'lote', 'unidades_producidas', 'precio_costo', 'fecha_elaboracion',
                     'fecha_vencimiento']
     fieldsets = (
         ('Información de la Producción', {
