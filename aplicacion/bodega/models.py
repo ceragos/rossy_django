@@ -129,7 +129,10 @@ class ProduccionProducto(Auditoria):
         if self._state.adding:
 
             # El numero de lote sera el consecutivo del anterior, del mismo producto
-            # self.lote = self.objects.all().order_by('-fecha_creacion').first().lote + 1
+            self.lote = ProduccionProducto.objects\
+                            .filter(producto_detallado=self.producto_detallado)\
+                            .order_by('-lote')\
+                            .first().lote + 1
 
             producto_detallado = ProductoDetallado.objects.get(id=self.producto_detallado.id)
 

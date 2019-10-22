@@ -1,0 +1,57 @@
+{% extends 'utilidades/base.html' %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Productos por Vencerse</h4>
+                        <p class="card-description">
+                            Entre el <span class="text-danger">{{ hoy }}</span>
+                            y el <span class="text-danger">{{ proxima_semana }}</span>
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        Lote
+                                    </th>
+                                    <th>
+                                        Producto
+                                    </th>
+                                    <th>
+                                        Fecha De Vencimiento
+                                    </th>
+                                    <th>
+                                        Unidades Producidas
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for producto in productos %}
+                                    <tr>
+                                        <td class="py-1">
+                                            {{ producto.lote }}
+                                        </td>
+                                        <td>
+                                            {{ producto.producto_detallado }}
+                                        </td>
+                                        <td>
+                                            <span class="text-danger">{{ producto.fecha_vencimiento }}</span>
+                                        </td>
+                                        <td>
+                                            {{ producto.unidades_producidas }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

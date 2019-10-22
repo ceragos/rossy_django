@@ -21,6 +21,7 @@ from rossy_django.settings import local
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('aplicacion.utilidades.urls')),
+    path('bodega/', include('aplicacion.bodega.urls')),
     path('accounts/', include('django.contrib.auth.urls'))
 ]
 
