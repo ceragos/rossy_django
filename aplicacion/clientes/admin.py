@@ -16,7 +16,7 @@ class ClienteAdmin(AdminModel):
                        'celular', 'ciudad', 'barrio', 'direccion')
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )

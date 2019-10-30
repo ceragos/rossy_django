@@ -11,7 +11,7 @@ class PaisAdmin(AdminModel):
             'fields': ('nombre',)
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )
@@ -24,7 +24,7 @@ class DepartamentoAdmin(AdminModel):
             'fields': ('nombre', 'pais')
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )
@@ -37,7 +37,7 @@ class CiudadAdmin(AdminModel):
             'fields': ('nombre', 'departamento')
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )
@@ -50,7 +50,7 @@ class BarrioAdmin(AdminModel):
             'fields': ('nombre', 'ciudad')
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )

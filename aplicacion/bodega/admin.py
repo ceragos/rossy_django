@@ -13,7 +13,7 @@ class UnidadMedidaAdmin(AdminModel):
             'fields': ('nombre', 'abreviatura')
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )
@@ -27,7 +27,7 @@ class MarcaAdmin(AdminModel):
             'fields': ('nombre',)
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )
@@ -41,7 +41,7 @@ class InsumoAdmin(AdminModel):
             'fields': ('nombre', 'descripcion')
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )
@@ -56,7 +56,7 @@ class InsumoDetalladoAdmin(AdminModel):
             'fields': ('insumo', 'marca', 'cantidad', 'unidad_medida')
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )
@@ -71,7 +71,7 @@ class CompraInsumoAdmin(AdminModel):
             'fields': ('insumo_detallado', 'unidades', 'precio_unitario', 'valor_compra')
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )
@@ -89,7 +89,7 @@ class ProductoAdmin(AdminModel):
             'fields': ('nombre', 'descripcion')
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )
@@ -104,7 +104,7 @@ class ProductoDetalladoAdmin(AdminModel):
             'fields': ('producto', 'cantidad', 'unidad_medida', 'precio_venta', 'unidades_disponibles')
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )
@@ -116,15 +116,15 @@ class ProductoDetalladoAdmin(AdminModel):
 @admin.register(ProduccionProducto)
 class ProduccionProductoAdmin(AdminModel):
     search_fields = ['producto_detallado__producto__nombre']
-    list_display = ['producto_detallado', 'lote', 'unidades_producidas', 'precio_costo', 'fecha_elaboracion',
+    list_display = ['producto_detallado', 'lote', 'unidades_producidas', 'unidades_vendidas', 'precio_costo', 'fecha_elaboracion',
                     'fecha_vencimiento']
     fieldsets = (
         ('Información de la Producción', {
-            'fields': ('lote', 'producto_detallado', 'unidades_producidas', 'precio_costo', 'fecha_elaboracion',
+            'fields': ('lote', 'producto_detallado', 'unidades_producidas', 'unidades_vendidas', 'precio_costo', 'fecha_elaboracion',
                        'fecha_vencimiento')
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )

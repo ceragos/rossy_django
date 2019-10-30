@@ -59,7 +59,7 @@ class ProductoVentaAdmin(AdminModel):
             'fields': ('factura', 'producto_detallado', 'unidades_vendidas', 'precio_venta', 'valor_venta')
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )
@@ -99,7 +99,7 @@ class AbonoCreditoAdmin(AdminModel):
             'fields': ('fecha_abono', 'valor_abono',)
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )
