@@ -22,6 +22,5 @@ class ProductosVencidosListView(ListView):
     def get_queryset(self):
         hoy = date.today()
         proxima_semana = hoy + timedelta(days=8)
-        productos = self.model.objects.all()
-        return productos.filter(fecha_vencimiento__range=[hoy, proxima_semana])
-
+        productos = self.model.objects.all().order_by('fecha_vencimiento')
+        return productos.filter(fecha_vencimiento__range=[hoy, proxima_semana], lote_agotado=False)

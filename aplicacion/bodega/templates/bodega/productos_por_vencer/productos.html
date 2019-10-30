@@ -22,10 +22,16 @@
                                         Producto
                                     </th>
                                     <th>
+                                        Lote
+                                    </th>
+                                    <th>
                                         Fecha De Vencimiento
                                     </th>
                                     <th>
                                         Unidades Producidas
+                                    </th>
+                                    <th>
+                                        Unidades Vendidas
                                     </th>
                                 </tr>
                                 </thead>
@@ -39,10 +45,24 @@
                                             {{ producto.producto_detallado }}
                                         </td>
                                         <td>
-                                            <span class="text-danger">{{ producto.fecha_vencimiento }}</span>
+                                            {{ producto.lote }}
+                                        </td>
+                                        <td>
+                                            {% if producto.fecha_vencimiento == hoy %}
+                                                <span class="text-danger">
+                                            {% elif producto.fecha_vencimiento == proxima_semana %}
+                                                <span class="text-secondary">
+                                            {% else %}
+                                                <span class="text-warning">
+                                            {% endif %}
+                                                {{ producto.fecha_vencimiento }}
+                                            </span>
                                         </td>
                                         <td>
                                             {{ producto.unidades_producidas }}
+                                        </td>
+                                        <td>
+                                            {{ producto.unidades_vendidas }}
                                         </td>
                                     </tr>
                                 {% endfor %}
