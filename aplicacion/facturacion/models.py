@@ -5,7 +5,7 @@ from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
-from aplicacion.bodega.models import ProductoDetallado
+from aplicacion.bodega.models import ProductoDetallado, ProduccionProducto
 from aplicacion.clientes.models import Cliente
 from aplicacion.utilidades.models import Auditoria
 
@@ -106,9 +106,19 @@ class ProductoVenta(Auditoria):
 
             producto_detallado = ProductoDetallado.objects.get(id=self.producto_detallado.id)
 
-            # El guardado de producto venta decrementa el numero de unidades, a el numero de productos disponibles
+            # El guardado de producto venta, decrementa el numero de unidades disponibles al campo productos_disponibles
             producto_detallado.unidades_disponibles -= self.unidades_vendidas
             producto_detallado.save()
+
+            productos_producidos = ProduccionProducto.objects\
+                .filter(producto_detallado=producto_detallado, lote_agotado=False)\
+                .order_by('fecha_vencimiento')
+
+            producto_producido = productos_producidos.first()
+            producto_producido.unidades_vendidas += self.unidades_vendidas
+            if producto_producido.unidades_vendidas >= producto_producido.unidades_producidas:
+                producto_producido.lote_agotado = True
+            producto_producido.save()
 
             factura = Factura.objects.get(id=self.factura.id)
             factura.total += self.valor_venta
