@@ -1,5 +1,7 @@
+from datetime import date
+
 from django.db import models
-from django.db.models.signals import pre_delete
+from django.db.models.signals import pre_delete, post_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
@@ -113,9 +115,14 @@ class ProduccionProducto(Auditoria):
                                            on_delete=models.PROTECT,
                                            related_name='produccion_producto_producto_detallado')
     unidades_producidas = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('unidades producidas'))
+    unidades_vendidas = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('unidades vendidas'),
+                                                    default=0)
+    unidades_vencidas = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('unidades vencidas'),
+                                                    default=0)
     precio_costo = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('precio de costo'))
     fecha_elaboracion = models.DateField(null=False, blank=False, verbose_name=_('fecha de elaboración'))
     fecha_vencimiento = models.DateField(null=False, blank=False, verbose_name=_('fecha de vencimiento'))
+    lote_agotado = models.BooleanField(default=False, verbose_name=_('lote agotado'))
 
     class Meta:
         verbose_name = _('producción de producto')
@@ -124,12 +131,22 @@ class ProduccionProducto(Auditoria):
     def __str__(self):
         return '{}'.format(self.producto_detallado)
 
+    @property
+    def vencido(self):
+        if self.fecha_vencimiento < date.today():
+            return True
+
     def save(self, *args, **kwargs):
         # Si la producción se esta creando:
         if self._state.adding:
 
             # El numero de lote sera el consecutivo del anterior, del mismo producto
-            # self.lote = self.objects.all().order_by('-fecha_creacion').first().lote + 1
+            produccion = ProduccionProducto.objects\
+                            .filter(producto_detallado=self.producto_detallado)\
+                            .order_by('-lote')\
+                            .first()
+
+            self.lote = (produccion.lote + 1) if produccion else 1
 
             producto_detallado = ProductoDetallado.objects.get(id=self.producto_detallado.id)
 
@@ -146,3 +163,29 @@ def produccion_producto_delete_handler(sender, instance, **kwargs):
     # El eliminado de producto venta incrementa el numero de unidades, a el numero de productos disponibles
     producto_detallado.unidades_disponibles -= instance.unidades_producidas
     producto_detallado.save()
+
+
+@receiver(post_save, sender=ProduccionProducto)
+def produccion_producto_save_handler(sender, instance, **kwargs):
+    if instance.unidades_vendidas > instance.unidades_producidas:
+        print("lote: {} estado: {}, unidades vendidas: {}, unidades producidas: {}".format(instance.lote,
+                                                                                           instance.lote_agotado,
+                                                                                           instance.unidades_vendidas,
+                                                                                           instance.unidades_producidas))
+        # Si la cantidad de unidades vendidas es mayor a la del lote, se toman las unidades disponibles del
+        # siguiente lote y se marca el actual como agotado lote: 3 unidades vendidas: 4, unidades producidas: 3
+
+        unidades_revasadas = instance.unidades_vendidas - instance.unidades_producidas
+        instance.unidades_vendidas = instance.unidades_producidas
+
+        proxima_produccion = ProduccionProducto.objects \
+            .filter(producto_detallado=instance.producto_detallado, lote_agotado=False) \
+            .order_by('fecha_vencimiento').first()
+
+        proxima_produccion.unidades_vendidas = unidades_revasadas
+
+        if proxima_produccion.unidades_vendidas >= proxima_produccion.unidades_producidas:
+            proxima_produccion.lote_agotado = True
+
+        proxima_produccion.save()
+        instance.save()

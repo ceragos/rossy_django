@@ -1,0 +1,77 @@
+{% extends 'utilidades/base.html' %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Productos por Vencerse</h4>
+                        <p class="card-description">
+                            Entre el <span class="text-danger">{{ hoy }}</span>
+                            y el <span class="text-danger">{{ proxima_semana }}</span>
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        Lote
+                                    </th>
+                                    <th>
+                                        Producto
+                                    </th>
+                                    <th>
+                                        Lote
+                                    </th>
+                                    <th>
+                                        Fecha De Vencimiento
+                                    </th>
+                                    <th>
+                                        Unidades Producidas
+                                    </th>
+                                    <th>
+                                        Unidades Vendidas
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for producto in productos %}
+                                    <tr>
+                                        <td class="py-1">
+                                            {{ producto.lote }}
+                                        </td>
+                                        <td>
+                                            {{ producto.producto_detallado }}
+                                        </td>
+                                        <td>
+                                            {{ producto.lote }}
+                                        </td>
+                                        <td>
+                                            {% if producto.fecha_vencimiento == hoy %}
+                                                <span class="text-danger">
+                                            {% elif producto.fecha_vencimiento == proxima_semana %}
+                                                <span class="text-secondary">
+                                            {% else %}
+                                                <span class="text-warning">
+                                            {% endif %}
+                                                {{ producto.fecha_vencimiento }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            {{ producto.unidades_producidas }}
+                                        </td>
+                                        <td>
+                                            {{ producto.unidades_vendidas }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

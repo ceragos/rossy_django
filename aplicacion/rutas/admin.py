@@ -13,7 +13,7 @@ class RutaAdmin(AdminModel):
             'fields': ('nombre_ruta', 'clientes',)
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )
@@ -27,7 +27,7 @@ class ZonaAdmin(AdminModel):
             'fields': ('nombre', 'rutas',)
         }),
         ('Auditoria', {
-            'fields': ('activo', 'creado_por', 'fecha_creacion', 'ip_creacion',
+            'fields': ('creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion')
         }),
     )

@@ -37,8 +37,9 @@ class Usuario(AbstractUser):
         se genera un registro de quien, cuando y desde donde se modifica la instancia.
         """
         if self._state.adding:
-            self.creado_por = get_current_user()
-            self.ip_creacion = get_current_request().META['REMOTE_ADDR']
+            if Usuario.objects.count() > 0:
+                self.creado_por = get_current_user()
+                self.ip_creacion = get_current_request().META['REMOTE_ADDR']
         else:
             self.modificado_por = get_current_user()
             self.fecha_modificacion = datetime.now()
