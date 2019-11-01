@@ -120,7 +120,7 @@ class ProduccionProductoAdmin(AdminModel):
                     'fecha_vencimiento']
     fieldsets = (
         ('Información de la Producción', {
-            'fields': ('lote', 'producto_detallado', 'unidades_producidas', 'unidades_vendidas', 'precio_costo', 'fecha_elaboracion',
+            'fields': ('lote', 'producto_detallado', 'unidades_producidas', 'precio_costo', 'fecha_elaboracion',
                        'fecha_vencimiento')
         }),
         ('Auditoria', {
