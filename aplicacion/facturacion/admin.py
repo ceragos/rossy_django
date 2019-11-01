@@ -31,10 +31,10 @@ class AbonoCreditoInline(admin.StackedInline):
 
 @admin.register(Factura)
 class FacturaAdmin(AdminModel):
-    search_fields = ['cliente__numero_identificacion']
+    search_fields = ['cliente__numero_identificacion', 'cliente__nombres', 'cliente__apellidos']
     list_filter = ['contado', 'credito', 'pagada']
     list_display = ['factura_numero', 'fecha_compra', 'cliente', 'contado', 'credito', 'pagada', 'total',
-                    'abonos_pagados']
+                    'abonos_pagados', 'saldo_pendiente']
     fieldsets = (
         ('Forma de Pago', {
             'fields': ('contado', 'credito', 'fecha_pago')
@@ -70,8 +70,8 @@ class ProductoVentaAdmin(AdminModel):
 
 @admin.register(FacturaCredito)
 class FacturaCreditoAdmin(AdminModel):
-    search_fields = ['cliente__numero_identificacion']
-    list_display = ['factura_numero', 'fecha_pago', 'fecha_compra', 'cliente', 'total', 'abonos_pagados']
+    search_fields = ['cliente__numero_identificacion', 'cliente__nombres', 'cliente__apellidos']
+    list_display = ['factura_numero', 'fecha_pago', 'fecha_compra', 'cliente', 'total', 'abonos_pagados', 'saldo_pendiente']
     fieldsets = (
         ('Forma de Pago', {
             'fields': ('credito', 'fecha_pago')
