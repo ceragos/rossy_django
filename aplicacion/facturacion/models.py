@@ -47,6 +47,10 @@ class Factura(Auditoria):
                 total_abonos += abono.valor_abono
             return total_abonos
 
+    @property
+    def saldo_pendiente(self):
+        return self.total - self.abonos_pagados
+
     def clean(self, *args, **kwargs):
 
         if self.contado and self.credito:
