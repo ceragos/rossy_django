@@ -1,0 +1,286 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="UTF-8">
+    <title>ROSSY COMERCIALIZADORA</title>
+    <link rel="stylesheet" href="{% static 'website/css/estilos.css' %}">
+    <link rel="stylesheet" href="{% static 'website/slider.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/secciones.css' %}">
+    <script src="https://use.fontawesome.com/502b7294a9.js"></script>
+    <link rel="stylesheet" href="{% static 'website/css/redes.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/tabla.css' %}">
+    <link rel="stylesheet" href="{% static 'website/sss/sss.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'website/css/formulario.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/responsive.css' %}">
+
+</head>
+<body>
+<div class="red">
+    <div id="facebook"><a href="https://www.facebook.com/pg/rossycomercializadora/photos/?ref=page_internal"
+                          target="none" class="fa fa-facebook"></a></div>
+    <div id="youtube"><a href="https://www.instagram.com/rossy.comercializadora/" class="fa fa-instagram"></a></div>
+    <div id="twitter"><a href="https://api.whatsapp.com/send?phone=573186103337" class="fa fa-whatsapp"></a></div>
+
+</div>
+<header>
+    <!-- aquí comienza nuestro menu -->
+    <div class="ancho">
+        <div class="logo">
+            <p><a href="#home"><img src="{% static 'website/imagenes/logo.png' %}" width=15%></a></p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#pedidos">Pedidos</a></li>
+                <li><a href="#mapa">Contacto</a></li>
+                <li><a href="{% url 'index' %}">Dashboard</a></li>
+            </ul>
+        </nav>
+    </div>
+</header><a name="home"></a>
+<div class="ancho-letras">
+    <div class="letras-slider">
+        <h1 class="animated zoomIn">Rossy</h1>
+        <p class="animated slideInUp">En ROSSY COMERCIALIZADORA convertimos el maíz en arepas únicas y diferentes para
+            nuestra familia, arepas de100% 🌽maíz, sin harinas, sin conservantes con rellenos naturales y deliciosos ,
+            que contribuyen especialmente a un sano y vital día. Nuestro portafolio es amplio y muy sabroso. Date el
+            gusto de disfrutarnos!</p>
+    </div>
+</div>
+<div id="particles-js"></div>
+<section class="wap">
+    <section class="bienvenidos">
+        <h2><a name="nosotros">Bienvenidos a ROSSY COMERCIALIZADORA</a></h2>
+        <h3>Nuestras arepas son sanas, de puro maíz, innovamos aprovechando la técnica de conservación en frio; Para
+            ofrecer arepas de queso molido y con rellenos de quesillo y proteínas (Carne o Pollo), conservando el
+            producto hasta por 45 días, sin utilizar conservantes.</h3>
+    </section>
+    <section class="contenedor-columnas">
+        <div class="columnasx3">
+            <img src="{% static 'website/imagenes/RCA.jpg' %}" alt="">
+            <h4>Misión</h4>
+            <p align="justify">ROSSY COMERCIALIZADORA concentra su actividad económica en la producción y
+                comercialización de arepas de maíz, con queso y diferentes rellenos ofreciendo a sus consumidores
+                productos innovadores y de excelente calidad en beneficio a la salud manteniendo rentabilidad para el
+                mantenimiento y desarrollo de la empresa.</p>
+        </div>
+        <div class="columnasx3">
+            <img src="{% static 'website/imagenes/RCA2.jpg' %}" alt="">
+            <h4>Visión</h4>
+            <p align="justify">Nuestra empresa espera estar posicionada en el mercado vallecaucano al final del año 2022
+                y ser distinguida por su excelencia en procesos productivos y esfuerzo humano, reflejados en la calidad
+                y variedad de nuestros productos conservando su principal interés en la preservación de la salud de
+                nuestros consumidores.</p>
+        </div>
+        <div class="columnasx3">
+            <img src="{% static 'website/imagenes/IMG_1060.jpeg' %}" alt="">
+            <h4>¿Qué Hacemos?</h4>
+            <p align="justify">Rossy comercializadora se centra en ofrecer arepas de 100% maíz, churros y pancerotti de
+                harina de trigo, sin conservantes; siendo estos aceptados por el mercado, permitiéndonos estar por casi
+                10 años en el mercado tulueño.</p>
+        </div>
+    </section>
+</section>
+
+<section class="banner-1">
+    <h3></h3>
+</section>
+<section class="wap">
+    <section class="bienvenidos">
+        <h2><a name="pedidos">Pedidos</a></h2>
+        <h3>podrás realizar el pedido de cualquiera de nuestros productos a través de WhatsApp</h3>
+    </section>
+
+    <section class="contenedor-columnas">
+        <div class="columnasx3">
+            <h4>Arepa Sencilla</h4>
+            <img src="{% static 'website/imagenes/arepasencilla.png' %}" width="20px">
+            <p><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wpme.link/G94k"
+                                                                   target="blank">WhatsApp</a></p>
+        </div>
+        <div class="columnasx3">
+            <h4>Arepa Queso Molido</h4>
+            <img src="{% static 'website/imagenes/arepaquesomolido.png' %}" width="20px">
+            <p><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wpme.link/OISF"
+                                                                   target="blank">WhatsApp</a></p>
+        </div>
+        <div class="columnasx3">
+            <h4>Arepa Rellena de Quesillo</h4>
+            <img src="{% static 'website/imagenes/areparellenadequesillo.png' %}" width="20px">
+            <p><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wpme.link/5YuB"
+                                                                   target="blank">WhatsApp</a></p>
+        </div>
+    </section>
+
+    <section class="banner-3">
+        <h3></h3>
+    </section>
+
+    <section class="contenedor-columnas">
+        <div class="columnasx3">
+            <h4>Arepa Rellena de Pollo</h4>
+            <img src="{% static 'website/imagenes/areparellenadepollo.png' %}" width="20px">
+            <p><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wa.link/zgy7"
+                                                                   target="blank">WhatsApp</a></p>
+        </div>
+        <div class="columnasx3">
+            <h4>Arepa Rellena de Carne</h4>
+            <img src="{% static 'website/imagenes/areparellenadecarne.png' %}" width="20px">
+            <p><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wpme.link/EuGM"
+                                                                   target="blank">WhatsApp</a></p>
+        </div>
+        <div class="columnasx3">
+            <h4>Chorizos</h4>
+            <img src="{% static 'website/imagenes/chorizo.png' %}" width="20px">
+            <p><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wpme.link/8cE3"
+                                                                   target="blank">whatsApp</a></p>
+        </div>
+    </section>
+
+    <section class="banner-3">
+        <h3></h3>
+    </section>
+
+    <section class="contenedor-columnas">
+        <div class="columnasx3">
+            <h4>Yogures Naturales</h4>
+            <img src="{% static 'website/imagenes/yogurt.png' %}" width="20px">
+            <p><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wpme.link/Ypk8"
+                                                                   target="blank">WhatsApp</a></p>
+        </div>
+        <div class="columnasx3">
+            <h4>Churros de Queso</h4>
+            <img src="{% static 'website/imagenes/churroqueso.png' %}" width="20px">
+            <p><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wpme.link/ghFI"
+                                                                   target="blank">WhatsApp</a></p>
+        </div>
+        <div class="columnasx3">
+            <h4>Churros de Bocadillo con Queso</h4>
+            <img src="{% static 'website/imagenes/churrobocadilloqueso.png' %}" width="20px">
+            <p><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wpme.link/MDfX"
+                                                                   target="blank">WhatsApp</a></p>
+        </div>
+    </section>
+
+    <section class="banner-3">
+        <h3></h3>
+    </section>
+
+    <section class="contenedor-columnas">
+        <div class="columnasx3">
+            <h4>Churros de Arequipe con Queso</h4>
+            <img src="{% static 'website/imagenes/churroarequipequeso.png' %}" width="20px">
+            <p><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wpme.link/lE9H"
+                                                                   target="blank">WhatsApp</a></p>
+        </div>
+        <div class="columnasx3">
+            <h4>Pancerotti de Pollo</h4>
+            <img src="{% static 'website/imagenes/pancerottipollo.png' %}" width="20px">
+            <p><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wpme.link/lLfn"
+                                                                   target="blank">WhatsApp</a></p>
+        </div>
+        <div class="columnasx3">
+            <h4>Para tu empresa</h4>
+            <img src="{% static 'website/imagenes/tarjeta.jpg' %}" width="20px">
+            <p><i class="fa fa-whatsapp" aria-hidden="true"></i><a href="https://wa.link/Wc18"
+                                                                   target="blank">WhatsApp</a></p>
+        </div>
+    </section>
+</section>
+
+<section class="banner-2">
+    <h3></h3>
+</section>
+
+<section class="wap">
+    <section class="bienvenidos">
+        <h2><a name="galeria">Galería</a></h2>
+        <h3></h3>
+    </section>
+
+    <section class="testimonios">
+        <div class="slider">
+            <div class="slider-1">
+                <img src="{% static 'website/imagenes/1.jpeg' %}" width=70%>
+            </div>
+            <div class="slider-1">
+                <img src="{% static 'website/imagenes/2.jpg' %}" width=70%>
+            </div>
+            <div class="slider-1">
+                <img src="{% static 'website/imagenes/3.jpeg' %}" width=70%>
+            </div>
+            <div class="slider-1">
+                <img src="{% static 'website/imagenes/4.jpg' %}" width="70%">
+            </div>
+        </div>
+    </section>
+
+    <section class="bienvenidos">
+        <h2><a name="mapa">¿Cómo llegar?</a></h2>
+        <h3></h3>
+    </section>
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.7246304499117!2d-76.19929628573728!3d4.076408047890396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e39c5874ee45689%3A0xbd57db1322a3bea6!2sROSSY%20Comercializadora!5e0!3m2!1ses-419!2sco!4v1571185820745!5m2!1ses-419!2sco"
+            width=100% height=350px frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+    <section class="wap">
+        <section class="bienvenidos">
+            <h2>Contáctanos</h2>
+            <h3></h3>
+        </section>
+        <section class="dos-columnas">
+            <div class="formulario">
+                <img src="{% static 'website/imagenes/2.jpg' %}" width=80%>
+            </div>
+
+            <div class="datos">
+                <ul class="datos-contacto">
+                    <li><i class="fa fa-map-marker" aria-hidden="true"></i></li>
+                    <li><h4>Dirección:</h4><a href="https://goo.gl/maps/9CqVUkhiM4CP3LSKA" target="blank"> 36 # 27 - 63
+                        Tuluá</a></li>
+                    <li><i class="fa fa-mobile" aria-hidden="true"></i></li>
+                    <li><h4>Teléfono:</h4><a href="tel:+573186103337">+57 3186103337</a></li>
+                    <li><i class="fa fa-envelope" aria-hidden="true"></i></li>
+                    <li><h4>E-mail</h4><a
+                            href="mailto:rossy.comercializadora1@gmail.com?Subject=estoy%20interesado%20en%20su%20producto"
+                            target="blank">rossy.comercializadora1@gmail.com</a></li>
+                </ul>
+            </div>
+            <div class="datos">
+                <ul class="datos-contacto">
+                    <li><i class="fa fa-whatsapp" aria-hidden="true"></i></li>
+                    <li><h4>WhatsApp:</h4><a href="https://api.whatsapp.com/send?phone=573186103337" target="blank">+57
+                        3186103337</a></li>
+                    <li><i class="fa fa-facebook" aria-hidden="true"></i></li>
+                    <li><h4>Facebook:</h4><a
+                            href="https://www.facebook.com/pg/rossycomercializadora/photos/?ref=page_internal"
+                            target="blank">ROSSY comercializadora</a></li>
+                    <li><i class="fa fa-instagram" aria-hidden="true"></i></li>
+                    <li><h4>Instagram:</h4><a href="https://www.instagram.com/rossy.comercializadora/" target="blank">rossy.comercializadora</a>
+                    </li>
+                </ul>
+            </div>
+
+
+        </section>
+
+    </section>
+    <section class="limpia"></section>
+    <footer>
+        <div>GitaBue Soft</div>
+        <div>Desarrollo Web</div>
+    </footer>
+
+
+    <script src="{% static 'website/js/particles.js' %}"></script>
+    <script src="{% static 'website/js/app.js' %}"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="{% static 'website/js/alto.js' %}"></script>
+    <script src="{% static 'website/js/sss/sss.js' %}"></script>
+</body>
+</html>

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'aplicacion.facturacion',
     'aplicacion.rutas',
     'aplicacion.utilidades',
+    'aplicacion.website',
 ]
 
 MIDDLEWARE = [
