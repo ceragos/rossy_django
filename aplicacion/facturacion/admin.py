@@ -3,6 +3,8 @@ from django.contrib import admin
 from aplicacion.facturacion.models import Factura, ProductoVenta, FacturaCredito, AbonoCredito
 from aplicacion.utilidades.admin import AdminModel
 
+from easy_select2 import select2_modelform
+
 
 class ProductoVentaInline(admin.StackedInline):
     model = ProductoVenta
@@ -15,6 +17,7 @@ class ProductoVentaInline(admin.StackedInline):
     readonly_fields = ['precio_venta', 'valor_venta']
     extra = 1
     can_delete = False
+    form = select2_modelform(ProductoVenta, attrs={'width': '220px'})
 
 
 class AbonoCreditoInline(admin.StackedInline):
@@ -47,6 +50,7 @@ class FacturaAdmin(AdminModel):
                        'creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion']
     inlines = [ProductoVentaInline]
+    form = select2_modelform(Factura, attrs={'width': '220px'})
 
 
 @admin.register(ProductoVenta)

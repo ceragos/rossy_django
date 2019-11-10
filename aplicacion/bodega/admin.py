@@ -1,4 +1,5 @@
 from django.contrib import admin
+from easy_select2 import select2_modelform
 
 from aplicacion.bodega.models import Insumo, Producto, UnidadMedida, Marca, \
     InsumoDetallado, CompraInsumo, ProductoDetallado, ProduccionProducto
@@ -111,6 +112,7 @@ class ProductoDetalladoAdmin(AdminModel):
     readonly_fields = ['unidades_disponibles',
                        'creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion']
+    form = select2_modelform(ProductoDetallado, attrs={'width': '220px'})
 
 
 @admin.register(ProduccionProducto)
@@ -131,3 +133,4 @@ class ProduccionProductoAdmin(AdminModel):
     readonly_fields = ['lote',
                        'creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion']
+    form = select2_modelform(ProduccionProducto, attrs={'width': '220px'})
