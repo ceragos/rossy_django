@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'aplicacion.rutas',
     'aplicacion.utilidades',
     'aplicacion.website',
+
+    # aplicaciones de terceros
+    'easy_select2',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-SUIT_CONFIG  =  {
+SUIT_CONFIG = {
     # header
     'ADMIN_NAME': 'Rossy',
     'HEADER_DATE_FORMAT': 'l, j. F Y ',
