@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.contrib.admin.models import LogEntry
+from import_export.admin import ImportExportModelAdmin
 
 
-class AdminModel(admin.ModelAdmin):
+class AdminModel(ImportExportModelAdmin):
     readonly_fields = ['creado_por', 'fecha_creacion', 'ip_creacion',
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion']
 
