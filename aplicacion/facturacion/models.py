@@ -54,11 +54,14 @@ class Factura(Auditoria):
     def clean(self, *args, **kwargs):
 
         if self.contado and self.credito:
-            raise ValidationError({'contado': ["Solo puede seleccionar una opcion (Credito / Contado)",],
-                                   'credito': ["Solo puede seleccionar una opcion (Credito / Contado)", ]})
+            raise ValidationError({'contado': ["Solo puede seleccionar una opcion (Crédito / Contado)",],
+                                   'credito': ["Solo puede seleccionar una opcion (Crédito / Contado)", ]})
 
         if self.fecha_pago is not None and self.contado:
-            raise ValidationError({'fecha_pago': ["Solo disponible para pagos a credito", ]})
+            raise ValidationError({'fecha_pago': ["Solo disponible para pagos a crédito", ]})
+
+        if self.credito and self.fecha_pago is None:
+            raise ValidationError({'fecha_pago': ["La fecha de pago es obligatoria para los créditos", ]})
 
     def save(self, *args, **kwargs):
         if self.contado:
