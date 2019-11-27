@@ -1,0 +1,71 @@
+{% extends 'utilidades/base.html' %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Facturas por Cobrar</h4>
+{#                        <p class="card-description">#}
+{#                            Entre el <span class="text-danger">{{ hoy }}</span>#}
+{#                            y el <span class="text-danger">{{ proxima_semana }}</span>#}
+{#                        </p>#}
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        Factura No
+                                    </th>
+                                    <th>
+                                        Fecha de Pago
+                                    </th>
+                                    <th>
+                                        Nombre del Cliente
+                                    </th>
+                                    <th>
+                                        Total
+                                    </th>
+                                    <th>
+                                        Saldo Pendiente
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for credito in creditos %}
+                                    <tr>
+                                        <td>
+                                            {{ credito.factura_numero }}
+                                        </td>
+                                        <td class="py-1">
+                                            {% if credito.fecha_pago <= hoy %}
+                                                <span class="text-danger">
+                                            {% elif credito.fecha_pago <= proxima_semana %}
+                                                <span class="text-warning">
+                                            {% else %}
+                                                <span class="text-success">
+                                            {% endif %}
+                                                {{ credito.fecha_pago }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            {{ credito.cliente.nombre_completo }}
+                                        </td>
+                                        <td>
+                                            {{ credito.total }}
+                                        </td>
+                                        <td>
+                                            {{ credito.saldo_pendiente }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -23,7 +23,8 @@ urlpatterns = [
     path('', include('aplicacion.website.urls')),
     path('dashboard/', include('aplicacion.utilidades.urls')),
     path('bodega/', include('aplicacion.bodega.urls')),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('facturacion/', include('aplicacion.facturacion.urls')),
 ]
 
 if local.DEBUG:
