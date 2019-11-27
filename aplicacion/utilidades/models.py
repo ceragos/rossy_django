@@ -52,13 +52,16 @@ class Auditoria(models.Model):
         De lo contrario el estado corresponde a una modificación, por lo cual
         se genera un registro de quien, cuando y desde donde se modifica la instancia.
         """
-        if self._state.adding:
-            self.creado_por = get_current_user()
-            self.ip_creacion = get_current_request().META['REMOTE_ADDR']
-        else:
-            self.modificado_por = get_current_user()
-            self.fecha_modificacion = datetime.now()
-            self.ip_modificacion = get_current_request().META['REMOTE_ADDR']
+        try:
+            if self._state.adding:
+                self.creado_por = get_current_user()
+                self.ip_creacion = get_current_request().META['REMOTE_ADDR']
+            else:
+                self.modificado_por = get_current_user()
+                self.fecha_modificacion = datetime.now()
+                self.ip_modificacion = get_current_request().META['REMOTE_ADDR']
+        except Exception:
+            pass
 
         convertir_valores_campos_capitalize(self)
         super(Auditoria, self).save(*args, **kwargs)
