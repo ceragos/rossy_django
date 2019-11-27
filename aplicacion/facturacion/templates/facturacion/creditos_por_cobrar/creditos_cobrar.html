@@ -28,6 +28,9 @@
                                         Nombre del Cliente
                                     </th>
                                     <th>
+                                        Celular del Cliente
+                                    </th>
+                                    <th>
                                         Total
                                     </th>
                                     <th>
@@ -53,7 +56,10 @@
                                             </span>
                                         </td>
                                         <td>
-                                            {{ credito.cliente.nombre_completo }}
+                                            {{ credito.cliente.nombre_rapido }}
+                                        </td>
+                                        <td>
+                                            {{ credito.cliente.celular }}
                                         </td>
                                         <td>
                                             {{ credito.total }}
