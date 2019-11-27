@@ -91,6 +91,10 @@ class PersonaBase(models.Model):
         return "{} {}".format(self.nombres, self.apellidos)
 
     @property
+    def nombre_rapido(self):
+        return "{} {}".format(self.nombres.split()[0], self.apellidos.split()[0])
+
+    @property
     def primer_nombre(self):
         return self.nombres.split()[0]
 
