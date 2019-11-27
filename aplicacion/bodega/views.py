@@ -1,6 +1,5 @@
 from datetime import date, timedelta
 
-from django.shortcuts import render
 from django.views.generic import ListView
 
 from aplicacion.bodega.models import ProduccionProducto
