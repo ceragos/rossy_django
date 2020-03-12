@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # aplicaciones de terceros
     'easy_select2',
     'import_export',
+    'easy_pdf',
 ]
 
 MIDDLEWARE = [
