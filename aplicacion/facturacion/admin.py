@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from aplicacion.facturacion.models import Factura, ProductoVenta, FacturaCredito, AbonoCredito
 from aplicacion.utilidades.admin import AdminModel
@@ -51,6 +53,15 @@ class FacturaAdmin(AdminModel):
                        'modificado_por', 'fecha_modificacion', 'ip_modificacion']
     inlines = [ProductoVentaInline]
     form = select2_modelform(Factura, attrs={'width': '220px'})
+    actions = ['generar_pdf']
+
+    def generar_pdf(self, request, queryset):
+        id = queryset[0].id
+        factura_id = Factura.encryptId(id)
+        url = reverse('facturacion:factura_pdf', kwargs={'factura_id': factura_id})
+        return HttpResponseRedirect(url)
+
+    generar_pdf.short_description = "Generar recibo"
 
 
 @admin.register(ProductoVenta)

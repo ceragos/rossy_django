@@ -24,7 +24,7 @@ urlpatterns = [
     path('dashboard/', include('aplicacion.utilidades.urls')),
     path('bodega/', include('aplicacion.bodega.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('facturacion/', include('aplicacion.facturacion.urls')),
+    path('facturacion/', include(('aplicacion.facturacion.urls', 'facturacion'), namespace='facturacion')),
 ]
 
 if local.DEBUG:

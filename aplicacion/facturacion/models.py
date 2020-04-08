@@ -4,6 +4,8 @@ from django.db.models.signals import pre_delete, post_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
+from django.core.signing import Signer, BadSignature
+
 # Create your models here.
 from aplicacion.bodega.models import ProductoDetallado, ProduccionProducto
 from aplicacion.clientes.models import Cliente
@@ -50,6 +52,19 @@ class Factura(Auditoria):
     @property
     def saldo_pendiente(self):
         return self.total - self.abonos_pagados
+
+    @staticmethod
+    def encryptId(pedido_id):
+        signer = Signer()
+        return signer.sign(pedido_id)
+
+    @staticmethod
+    def decryptId(encrypted_id):
+        try:
+            signer = Signer()
+            return int(signer.unsign(encrypted_id))
+        except BadSignature:
+            return None
 
     def clean(self, *args, **kwargs):
 
