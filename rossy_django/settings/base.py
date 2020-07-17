@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'easy_select2',
     'import_export',
     'easy_pdf',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
