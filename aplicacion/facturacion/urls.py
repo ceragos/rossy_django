@@ -5,5 +5,5 @@ from aplicacion.facturacion.views import CreditosCobrarListView, FacturaPDF
 
 urlpatterns = [
     path('credito_cobrar/', login_required(CreditosCobrarListView.as_view()), name = 'facturacion.credito_cobrar'),
-    path(r'factura_pdf/(?P<factura_id>[-_:\w\d]+)', FacturaPDF.as_view(), name='factura_pdf'),
+    path('factura_pdf/<str:factura_id>/', FacturaPDF.as_view(), name='factura_pdf'),
 ]
